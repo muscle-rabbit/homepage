@@ -9,5 +9,14 @@ modules.exports = {
     filename: "bundle.js"
   },
   module: {
-    
+    rules: [
+      {
+        test: /\.tsx?$/,
+        loader: "ts-loader",
+      }
+    ],
+    resolve: {
+      extensions: [ ".ts", ".tsx"],
+    }
   }
+}
