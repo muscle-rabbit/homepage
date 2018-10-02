@@ -1,22 +1,26 @@
-const path = require('path');
-const webpack = require('webpack')
+const path = require("path");
+const htmlWebpackPlugin = require("html-webpack-plugin");
 
-modules.exports = {
+module.exports = {
   mode: "development",
-  entry: "./src/App.js",
-  output : {
-    path: path.resolve(__dirname, 'dist'),
+  entry: "./src/index.tsx",
+  output: {
+    path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
   },
+  devtool: "inlinek-souce-map",
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: "ts-loader",
+        loader: "ts-loader"
       }
-    ],
-    resolve: {
-      extensions: [ ".ts", ".tsx"],
-    }
-  }
-}
+    ]
+  },
+  resolve: {
+    modules: ["node_modules", path.resolve(__dirname, "app")],
+    extensions: [".tsx", ".ts", ".js", ".jsx"]
+  },
+
+  plugins: [new htmlWebpackPlugin({ template: "./index.html" })]
+};
