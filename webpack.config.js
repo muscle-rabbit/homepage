@@ -1,38 +1,52 @@
-const path = require('path')
-const htmlWebpackPlugin = require('html-webpack-plugin')
+const path = require("path");
+const htmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
-  entry: './src/index.tsx',
+  mode: "development",
+  entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "dist"),
+    filename: "bundle.js"
   },
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   module: {
     rules: [
       {
-        enforce: 'pre',
+        enforce: "pre",
         test: /\.tsx?$/,
         use: [
           {
-            loader: 'tslint-loader',
+            loader: "tslint-loader",
             options: {
               typeCheck: true,
-              fix: true,
-            },
-          },
-        ],
+              fix: true
+            }
+          }
+        ]
       },
       {
         test: /\.tsx?$/,
-        loader: 'ts-loader',
+        loader: "ts-loader"
       },
-    ],
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "babel-loader"
+          },
+          {
+            loader: "react-svg-loader",
+            options: {
+              jsx: true // true outputs JSX tags
+            }
+          }
+        ]
+      }
+    ]
   },
   resolve: {
-    modules: ['node_modules', path.resolve(__dirname, 'app')],
-    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    modules: ["node_modules", path.resolve(__dirname, "app")],
+    extensions: [".tsx", ".ts", ".js", ".jsx"]
   },
-  plugins: [new htmlWebpackPlugin({ template: './index.html' })],
-}
+  plugins: [new htmlWebpackPlugin({ template: "./index.html" })]
+};

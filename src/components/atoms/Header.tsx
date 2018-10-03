@@ -1,13 +1,20 @@
 import * as React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 type Props = {
-    text: string
+  text: string
 }
 
 const Header: React.SFC<Props> = (props: Props) => {
-    return  <div>{props.text}</div>
+  return <Wrapper>{props.text}</Wrapper>
 }
 
+export default Header
 
-export default Header;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: #ddd;
+`
